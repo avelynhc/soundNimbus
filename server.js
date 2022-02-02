@@ -44,9 +44,21 @@ app.get("/lyrics/:id", (req, res) => {
         // res.send(data[0]) // access first item in the array
         res.json(data[req.params.id-1])
         res.json(data[req.params.id-1].lyrics)
+    }).catch((error) => {
+        console.log(error)
+        res.status(404).send("ERROR!")
+    })
+})
 
-
-
+app.get("/info/:id", (req, res) => {
+    // res.send("Hello music!")
+    musicData.getalbums().then((data) => {
+        // res.send(data)
+        // or res.json(data)
+        // res.send(req.params.id) // this id comes from endpoint id
+        // res.send(data[0]) // access first item in the array
+        res.json(data[req.params.id-1])
+        res.json(data[req.params.id-1].lyrics)
     }).catch((error) => {
         console.log(error)
         res.status(404).send("ERROR!")
@@ -54,7 +66,7 @@ app.get("/lyrics/:id", (req, res) => {
 })
 
 app.get("/music", (req, res) => {
-    res.send("Hello music!")
+    res.send("Hello Music!")
 })
 
 app.use((req, res) => {
