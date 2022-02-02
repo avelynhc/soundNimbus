@@ -9,8 +9,13 @@ app.use(express.static("public"))
 
 app.get("/", (req, res) => {
     // res.send("SoundNimbus")
-    res.sendFile(path.join(__dirname, "/views/index.html"))
+    // res.sendFile(path.join(__dirname, "/views/index.html"))
+    res.redirect("/home")
 })
 
+app.get("/home", (req, res) => {
+    // res.send("Hello Home!")
+    res.sendFile(path.join(__dirname, "/views/index.html"))
+})
 
 app.listen(HTTP_PORT, onHttpStart)
