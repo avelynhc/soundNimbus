@@ -1,7 +1,6 @@
 const express = require("express")
 const app = express()
 const path = require("path")
-const { traceDeprecation } = require("process")
 const musicData = require("./musicData")
 
 const HTTP_PORT = process.env.port || 8080
@@ -42,7 +41,7 @@ app.get("/lyrics/:id", (req, res) => {
         // or res.json(data)
         // res.send(req.params.id) // this id comes from endpoint id
         // res.send(data[0]) // access first item in the array
-        res.json(data[req.params.id-1])
+        // res.json(data[req.params.id-1])
         res.json(data[req.params.id-1].lyrics)
     }).catch((error) => {
         console.log(error)
@@ -58,7 +57,7 @@ app.get("/info/:id", (req, res) => {
         // res.send(req.params.id) // this id comes from endpoint id
         // res.send(data[0]) // access first item in the array
         res.json(data[req.params.id-1])
-        res.json(data[req.params.id-1].lyrics)
+        // res.json(data[req.params.id-1].lyrics)
     }).catch((error) => {
         console.log(error)
         res.status(404).send("ERROR!")
@@ -70,7 +69,7 @@ app.get("/music", (req, res) => {
 })
 
 app.use((req, res) => {
-    res.status(404).send("PAE NOT FOUND")
+    res.status(404).send("PAGE NOT FOUND")
 })
 
 app.listen(HTTP_PORT, onHttpStart)
