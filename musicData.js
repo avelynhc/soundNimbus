@@ -9,7 +9,7 @@ module.exports.getalbums = function() {
                 reject(error)
             } else {
                 albums = JSON.parse(data)
-                console.log(albums)
+                // console.log(albums)
                 resolve(albums)
             }
         })
