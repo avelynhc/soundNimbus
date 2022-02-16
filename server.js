@@ -1,6 +1,8 @@
 const express = require("express")
 const app = express()
 
+const exphbs = require('express-handlebars');
+
 const env = require("dotenv")
 env.config()
 
@@ -30,6 +32,13 @@ app.use(express.static("public"))
 // multer middleware
 const upload = multer()
 
+// handlebars
+app.engine('.hbs', exphbs.engine({ 
+    extname: '.hbs',
+    defaultLayout: 'main'
+}));
+app.set('view engine', '.hbs');
+
 app.get("/", (req, res) => {
     // res.send("SoundNimbus")
     // res.sendFile(path.join(__dirname, "/views/index.html"))
@@ -38,7 +47,13 @@ app.get("/", (req, res) => {
 
 app.get("/home", (req, res) => {
     // res.send("Hello Home!")
-    res.sendFile(path.join(__dirname, "/views/index.html"))
+    // res.sendFile(path.join(__dirname, "/views/index.html"))
+    musicData.getAlbums().then((data) => {
+        res.render('index', {
+            data: data,
+            layout: "main"
+        })
+    })
 })
 
 app.get("/about", (req, res) => {
@@ -58,7 +73,7 @@ app.get("/about", (req, res) => {
 
 app.get("/lyrics/:id", (req, res) => {
     // res.send("Hello lyrics!")
-    musicData.getalbums().then((data) => {
+    musicData.getAlbums().then((data) => {
         // res.send(data)
         // or res.json(data)
         // res.send(req.params.id) // this id comes from endpoint id
@@ -73,7 +88,7 @@ app.get("/lyrics/:id", (req, res) => {
 
 app.get("/info/:id", (req, res) => {
     // res.send("Hello music!")
-    musicData.getalbums().then((data) => {
+    musicData.getAlbums().then((data) => {
         // res.send(data)
         // or res.json(data)
         // res.send(req.params.id) // this id comes from endpoint id
@@ -88,7 +103,7 @@ app.get("/info/:id", (req, res) => {
 
 app.get("/music", (req, res) => {
     // res.send("Hello Music!")
-    musicData.getalbums().then((data) => {
+    musicData.getAlbums().then((data) => {
         res.json(data)
     }).catch((error) => {
         console.log(error)
@@ -97,7 +112,11 @@ app.get("/music", (req, res) => {
 })
 
 app.get("/albums", (req, res) => {
-    res.sendFile(path.join(__dirname, "/views/albums.html"))
+    // res.sendFile(path.join(__dirname, "/views/albums.html"))
+    res.render('albums', {
+        data: null,
+        layout: "main"
+    })
 })
 
 app.post("/albums/new", upload.single("photo"), (req, res) => {
@@ -123,11 +142,11 @@ app.post("/albums/new", upload.single("photo"), (req, res) => {
     }
 
     upload(req).then((uploaded) => {
-        req.body = uploaded.url
+        req.body.imagePath = uploaded.url
         console.log(req.body)
 
         musicData.addAlbum(req.body).then((data) => {
-            res.redirect('/music')
+            res.redirect('/home')
         }).catch((error) => {
             res.status(500).send(error)
         })
