@@ -19,7 +19,7 @@ module.exports.initialize = function() {
 
 module.exports.addAlbum = function(album) {
     return new Promise((resolve, reject) => {
-        album.id = album.length + 1
+        album.id = albums.length + 1
         albums.push(album)
         resolve()
     })
