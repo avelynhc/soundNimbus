@@ -1,8 +1,6 @@
 const env = require('dotenv')
 env.config()
 
-let albums = []
-
 const Sequelize = require('sequelize');
 
 var sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
@@ -38,7 +36,6 @@ var Song = sequelize.define('Song', {
     lyrics: Sequelize.STRING
 })
 
-// Album.hasMany(Song, {foreignKey: 'albumID'})
 Song.belongsTo(Album, {foreignKey: 'albumID'})
 
 module.exports.initialize = function() {
@@ -70,10 +67,6 @@ module.exports.getSongsByAlbumID = function(albumID) {
             where: {
                 albumID: albumID
             },
-            // include: [{
-            //     model: Album, 
-            //     // attributes: ["artist"]
-            // }]
         }).then((songs) => {
             console.log("SONG DATA without album:")
             // console.log(songs)
@@ -89,9 +82,6 @@ module.exports.getSongsByAlbumID = function(albumID) {
                     songs[i].albumImagePath = album.imagePath
                     songs[i].albumYear = album.year
                     songs[i].albumArtist = album.artist
-
-                    // console.log(album)
-                    // console.log(songs)
                 }
 
                 console.log("SONG DATA with album:")
@@ -111,15 +101,6 @@ module.exports.addAlbum = function(album) {
     return new Promise((resolve, reject) => {
         Album.create(album).then(() => {
             console.log("ALBUM CREATED")
-    
-        //     Song.create({
-        //         title: "Paranoid",
-        //         musicPath: "/music/paranoid_kanye.mp3",
-        //         lyrics: "Why are you so paranoid",
-        //         albumID: album.albumID
-        //     })
-        //   }).then(() => console.log("SONG CREATED"))
-
             resolve()
 
         }).catch((error) => {
@@ -127,10 +108,6 @@ module.exports.addAlbum = function(album) {
             console.log(error)
             reject()
         })
-
-        // album.id = albums.length + 1
-        // albums.push(album)
-        // resolve()
     })
 }
 
@@ -138,15 +115,6 @@ module.exports.addSong = function(song) {
     return new Promise((resolve, reject) => {
         Song.create(song).then(() => {
             console.log("SONG CREATED")
-    
-        //     Song.create({
-        //         title: "Paranoid",
-        //         musicPath: "/music/paranoid_kanye.mp3",
-        //         lyrics: "Why are you so paranoid",
-        //         albumID: album.albumID
-        //     })
-        //   }).then(() => console.log("SONG CREATED"))
-
             resolve()
 
         }).catch((error) => {
@@ -154,10 +122,6 @@ module.exports.addSong = function(song) {
             console.log(error)
             reject()
         })
-
-        // album.id = albums.length + 1
-        // albums.push(album)
-        // resolve()
     })
 }
 
@@ -169,25 +133,12 @@ module.exports.deleteAlbum = function(albumID) {
             }
         }).then(() => {
             console.log("ALBUM DELETED")
-    
-        //     Song.create({
-        //         title: "Paranoid",
-        //         musicPath: "/music/paranoid_kanye.mp3",
-        //         lyrics: "Why are you so paranoid",
-        //         albumID: album.albumID
-        //     })
-        //   }).then(() => console.log("SONG CREATED"))
-
             resolve()
 
         }).catch((error) => {
             console.log("ALBUM DELETE ERROR:")
             console.log(error)
         })
-
-        // album.id = albums.length + 1
-        // albums.push(album)
-        // resolve()
     })
 }
 
@@ -199,25 +150,11 @@ module.exports.deleteSong = function(songID) {
             }
         }).then((data) => {
             console.log("SONG DELETED")
-            // console.log(data)
-    
-        //     Song.create({
-        //         title: "Paranoid",
-        //         musicPath: "/music/paranoid_kanye.mp3",
-        //         lyrics: "Why are you so paranoid",
-        //         albumID: album.albumID
-        //     })
-        //   }).then(() => console.log("SONG CREATED"))
-
             resolve()
 
         }).catch((error) => {
             console.log("SONG DELETE ERROR:")
             console.log(error)
         })
-
-        // album.id = albums.length + 1
-        // albums.push(album)
-        // resolve()
     })
 }

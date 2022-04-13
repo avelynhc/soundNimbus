@@ -37,20 +37,12 @@ module.exports.initialize = function () {
 module.exports.registerUser = function(userData) {
     return new Promise(function (resolve, reject) {
         if (userData.password === userData.password2) {
-            
-            // bcrypt.hash(userData.password, 10).then((hash) => {
-            // userData.password = hash   
-            // do all user stuff 
-            // })
             let newUser = new User(userData)
 
             newUser.save((err) => {
                 if(err) {
-                  // there was an error
                   console.log(err);
                   reject("Error creating new user:" + err)
-                } else {
-                  // everything good
                   console.log(newUser);
                   resolve(userData)
                 }
@@ -66,13 +58,6 @@ module.exports.verifyLogin = function(userData) {
         User.findOne({ username: userData.username})
         .exec()
         .then((mongoData) => {
-
-            // bcrypt.compare(userData.password, mongoData.password).then((result) => {
-            //    if (result == true) {
-            //      // login successful stuff
-            //  }
-            // })
-            
             if (userData.password === mongoData.password) {
                 console.log("SUCCESSFUL LOGIN!")
 
@@ -96,13 +81,3 @@ module.exports.verifyLogin = function(userData) {
         })
     })
 }
-
-
-
-
-
-
-
-
-
-
