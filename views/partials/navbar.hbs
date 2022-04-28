@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light m-2">
+{{!-- <nav class="navbar navbar-expand-lg navbar-light bg-light m-2">
     <a class="navbar-brand" href="/home">SoundNimbus</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -11,8 +11,38 @@
         <a class="nav-item nav-link" href="/albums/new">Add Album</a>
         <a class="nav-item nav-link" href="/songs/new">Add Song</a>
         <a class="nav-item nav-link" href="/login">Login</a>
-       
+    </div>
+    </div>
+</nav> --}}
 
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home">SoundNimbus</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        {{!-- <li class="nav-item">
+          <a class="nav-link" href="/music">Music</a>
+        </li> --}}
+        <li class="nav-item">
+          <a class="nav-link" href="/albums/new">Add Album</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/songs/new">Add Song</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+      </ul>
     </div>
-    </div>
+  </div>
 </nav>

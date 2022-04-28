@@ -3,7 +3,6 @@
         {{#each data}}
           <div class="col-sm-6">
             <div class="card" >
-              {{!-- <img class="card-img-top" src="/images/playbutton.png"> --}}
               {{#if musicPath}}
               <video controls poster="{{albumImagePath}}">
                 <source src="{{musicPath}}" type="audio/mpeg">
@@ -16,11 +15,9 @@
                 <h6 class="card-title">{{albumArtist}}</h6>
                                 <p class="card-text">{{albumYear}}</p>
                 {{#if lyrics}}
-                  {{!-- <a href="/lyrics/{{albumID}}" class="btn btn-success">Lyrics</a> --}}
                   <p class="card-text">{{lyrics}}</p>
 
                 {{/if}} 
-                {{!-- <a href="/info/{{albumID}}" class="btn btn-dark">More Info</a> --}}
                 <a href="/songs/delete/{{songID}}" class="btn btn-danger">Delete</a>
               </div>
             </div>        

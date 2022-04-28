@@ -66,7 +66,6 @@ app.get("/", (req, res) => {
 });
 
 app.get("/home", (req, res) => {
-  // res.sendFile(path.join(__dirname, '/views/index.html'))
 
   musicData.getAlbums().then((data) => {
     res.render("index", {
@@ -77,7 +76,6 @@ app.get("/home", (req, res) => {
 });
 
 app.get("/lyrics/:id", (req, res) => {
-  // res.send('hello lyrics')
   musicData
     .getAlbums()
     .then((data) => {
@@ -96,7 +94,10 @@ app.get("/music", (req, res) => {
 });
 
 app.get("/about", (req, res) => {
-  res.send("hello about");
+  res.render("about", {
+    data: null,
+    layout: "main",
+  });
 });
 
 app.get("/info/:id", (req, res) => {
